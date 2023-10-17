@@ -1,0 +1,42 @@
+{% load static %}
+{% load utils %}
+<html lang="en">
+<head>
+    <title>Auto Contract</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<a href="{% url 'page_1_update' object.pk %}" ><button class="general-a">На головну</button></a>
+<div class="center">
+    <div class="title-container" style="margin-top: 50px">
+        <hr class="line" style="width: 200px"/>
+        <div class="text">Оберіть схему</div>
+        <hr class="line" style="width: 200px"/>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="base-blue-frame" style="display: flex;max-width: 650px">
+            {% for choice_value, choice_label in form.schema.field.choices %}
+            <label>
+                {% if object.schema == forloop.counter %}
+                    <input type="radio" name="schema" value="{{choice_value}}" checked/>
+                {% else %}
+                    <input type="radio" name="schema" value="{{choice_value}}">
+                {% endif %}
+
+                <img src="{{choice_label}}" alt="">
+                <span>Схема №{{choice_value}}</span>
+            </label>
+            {% endfor %}
+        </div>
+        <div class="foot">
+            <button class="button-next-back" type="submit">Далі</button>
+        </div>
+    </form>
+
+    <a href="{% url 'page_1_update' object.pk %}">
+        <button class="button-next-back" style="right: 0;left: 130px">Назад</button>
+    </a>
+</div>
+</body>
+</html>

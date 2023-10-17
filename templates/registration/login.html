@@ -1,0 +1,52 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>Auto Contract</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div class="center">
+    <img class="center" src="{% static 'pages/media/main_logo.png' %}" alt="" width="350" height="350">
+</div>
+
+<div class="center" style="margin-top: 30px">
+
+
+    {% if user.is_authenticated %}
+        <div class="title-container">
+            <hr class="line"/>
+            <div class="text">Ви авторизовані</div>
+            <hr class="line"/>
+        </div>
+        <p><a class="text" href="{% url 'page_1' %}">На головну</a></p>
+        <p><a class="text" href="{% url 'logout' %}">Вийти</a></p>
+    {% else %}
+        <div class="title-container">
+            <hr class="line"/>
+            <div class="text">Вхід у кабінет</div>
+            <hr class="line"/>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="base-blue-frame" style="padding-right: 20px">
+                <div style="float:left; margin-right: 20px">
+                    <label class="label-1">{{ form.username.label }}</label>
+                    {{ form.username }}
+                </div>
+                <div style="float:left; margin-right: 20px">
+                    <label class="label-1">{{ form.password.label }}</label>
+                    {{ form.password }}
+                </div>
+            </div>
+
+            <div class="foot">
+                <button type="submit">Увійти</button>
+            </div>
+        </form>
+    {% endif %}
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+{% load static %}
+{% load utils %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Auto Contract</title>
+</head>
+<body>
+<a href="{% url 'page_1_update' object.pk %}" ><button class="general-a">На головну</button></a>
+
+<div class="center">
+    <div class="title-container" style="margin-top: 50px">
+        <hr class="line" style="width: 140px"/>
+        <div class="text">Технічна інформація об'єкта</div>
+        <hr class="line" style="width: 140px"/>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="base-blue-frame" style="width: 1200px;max-width: 670px; overflow-y: scroll; height:530px;">
+            <div class="text" style="justify-content: center">
+                <span>Оператор системи</span>
+                <hr class="line" style="margin: 3px auto; width: 300px">
+            </div>
+
+            <div style="display: flex">
+                <div style="text-align: right; margin-top: 15px; width: 220px">
+                    <label class="label-to-left">{{ form.tp_num.label }}</label>
+                    {{ form.tp_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.line_num.label }}</label>
+                    {{ form.line_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.fider_num.label }}</label>
+                    {{ form.fider_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.fider_type.label }}</label>
+                    {{ form.fider_type }}
+                    <br>
+                    <label class="label-to-left">{{ form.full_power_t1.label }}</label>
+                    {{ form.full_power_t1 }}
+                    <br>
+                    <label class="label-to-left">{{ form.full_power_t2.label }}</label>
+                    {{ form.full_power_t2 }}
+                    <br>
+                </div>
+                <div style="text-align: right; margin-top: 15px; margin-left: auto">
+                    <label class="label-to-left">{{ form.substation_name.label }}</label>
+                    {{ form.substation_name }}
+                    <br>
+                    <label class="label-to-left">{{ form.os_section_numbers.label }}</label>
+                    {{ form.os_section_numbers }}
+                    <br>
+                    <label class="label-to-left">{{ form.os_line_mark.label }}</label>
+                    {{ form.os_line_mark }}
+                    <br>
+                    <label class="label-to-left">{{ form.os_line_type.label }}</label>
+                    {{ form.os_line_type }}
+                    <br>
+                    <label class="label-to-left">{{ form.os_line_length.label }}</label>
+                    {{ form.os_line_length }}
+                    <br>
+
+                </div>
+            </div>
+
+            <div class="text" style="justify-content: center; margin-top: 15px">
+                <span>Основний споживач</span>
+                <hr class="line" style="margin: 3px auto; width: 300px">
+            </div>
+
+            <div style="display: flex">
+                <div style="text-align: right; margin-top: 15px; width: 220px">
+                    <label style="text-align: center; float: left;">Номінал<br>рубільника в ВРЩ ж/б</label>
+                    {{ form.cutter_num_VRSH }}
+                </div>
+                <div style="text-align: right; margin-top: 15px; margin-left: auto">
+                    <label style="text-align: center; float: left; margin-right: 20px">Посада<br>уповноваженої
+                        особи</label>
+                    {{ form.auth_person_position }}
+                </div>
+            </div>
+            <div class="text" style="justify-content: center; margin-top: 20px">
+                <span>Споживач</span>
+                <hr class="line" style="margin: 3px auto; width: 300px">
+            </div>
+            <div style="display: flex">
+                <div style="text-align: right; margin-top: 15px; width: 230px">
+                    <label class="label-to-left">{{ form.line_type.label }}</label>
+                    {{ form.line_type }}
+                    <br>
+                    <label class="label-to-left">{{ form.line_length.label }}</label>
+                    {{ form.line_length }}
+                    <br>
+                    <label class="label-to-left">{{ form.av_num.label }}</label>
+                    {{ form.av_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.av_num_vrs.label }}</label>
+                    {{ form.av_num_vrs }}
+                    <br>
+                    <label class="label-to-left">{{ form.shield.label }}</label>
+                    {{ form.shield }}
+                    <br>
+                    <label class="label-to-left">{{ form.power.label }}</label>
+                    {{ form.power }}
+                    <br>
+                    <label class="label-to-left">{{ form.work_mode.label }}</label>
+                    {{ form.work_mode }}
+                    <br>
+                    <label class="label-to-left">{{ form.voltage_level.label }}</label>
+                    {{ form.voltage_level }}
+                    <br>
+                    <label class="label-to-left">{{ form.active_line_resistance.label }}</label>
+                    {{ form.active_line_resistance }}
+                    <br>
+                    <label class="label-to-left">{{ form.reactive_line_resistance.label }}</label>
+                    {{ form.reactive_line_resistance }}
+                    <br>
+                </div>
+                <div style="text-align: right; margin-top: 15px; width: 370px; margin-left: 70px">
+                    <label class="label-to-left">{{ form.reliability_category.label }}</label>
+                    {{ form.reliability_category }}
+                    <br>
+                    <label class="label-to-left">{{ form.line_mark.label }}</label>
+                    {{ form.line_mark }}
+                    <br>
+                    <label class="label-to-left">{{ form.initial_indicators.label }}</label>
+                    {{ form.initial_indicators }}
+                    <br>
+                    <label class="label-to-left">{{ form.counter_type.label }}</label>
+                    {{ form.counter_type }}
+                    <br>
+                    <label class="label-to-left">{{ form.counter_serial_num.label }}</label>
+                    {{ form.counter_serial_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.counter_nominal.label }}</label>
+                    {{ form.counter_nominal }}
+                    <br>
+                    <label class="label-to-left">{{ form.section_numbers.label }}</label>
+                    {{ form.section_numbers }}
+                    <br>
+                    <label class="label-to-left">{{ form.quarter.label }}</label>
+                    {{ form.quarter }}
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="foot">
+            <button class="button-next-back" type="submit" name="save">Далі</button>
+            <button class="button-next-back" style="right: 0;left: 130px" type="submit">Назад</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

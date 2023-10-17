@@ -1,0 +1,76 @@
+ class="button-next-back"{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Auto Contract</title>
+</head>
+<body>
+<a href="{% url 'page_1_update' object.pk %}" ><button class="general-a">На головну</button></a>
+
+<div class="center">
+    <div class="title-container" style="margin-top: 50px">
+        <hr class="line" style="width: 140px"/>
+        <div class="text">Інформація об'єкта</div>
+        <hr class="line" style="width: 140px"/>
+    </div>
+    <form method="post" id="myForm">
+        {% csrf_token %}
+        <div class="base-blue-frame" style="width: 700px; display: flex; padding-left: 10px">
+            <div style="width: 300px; margin: auto">
+                <div style="width: 300px; margin: auto">
+                    <label class="label-1">{{ form.object_type.label }}</label>
+                    {{ form.object_type }}
+                    <br>
+                    <label class="label-1">{{ form.general_consumer_pib.label }}</label>
+                    {{ form.general_consumer_pib }}
+                    <br>
+                    <label class="label-1">{{ form.eis_code.label }}</label>
+                    {{ form.eis_code }}
+                    <br>
+                    <label class="label-1">{{ form.index_circulation_address.label }}</label>
+                    {{ form.index_circulation_address }}
+                    <br>
+                    <label class="label-1">{{ form.index_legal_address.label }}</label>
+                    {{ form.index_legal_address }}
+                    <br>
+                    <label class="label-1">{{ form.actual_address.label }}</label>
+                    {{ form.actual_address }}
+                    <br>
+                    <label class="label-1">{{ form.activity_document.label }}</label>
+                    {{ form.activity_document }}
+                    <br>
+                </div>
+            </div>
+            <div style="width: 340px; margin: auto">
+                <label class="label-1">{{ form.contract_num.label }}</label>
+                {{ form.contract_num }}
+                <br>
+                <label class="label-1">{{ form.consumer_pib.label }}</label>
+                {{ form.consumer_pib }}
+                <br>
+                <label class="label-1">{{ form.abbreviated_full_name.label }}</label>
+                {{ form.abbreviated_full_name }}
+                <br>
+                <label class="label-1">{{ form.general_consumer_abbreviated.label }}</label>
+                {{ form.general_consumer_abbreviated }}
+                <br>
+                <label class="label-1">{{ form.position_pib.label }}</label>
+                {{ form.position_pib }}
+                <br>
+                <label class="label-1">{{ form.full_cons_name.label }}</label>
+                {{ form.full_cons_name }}
+                <br>
+                <label class="label-1" style="margin-top: 30px">{{ form.general_full_name.label }}</label>
+                {{ form.general_full_name }}
+                <br>
+            </div>
+        </div>
+
+        <div class="foot">
+            <button class="button-next-back" type="submit" name="save">Зберегти</button>
+            <button class="button-next-back" id="backButton" style="right: 0;left: 130px">Назад</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

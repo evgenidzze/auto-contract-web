@@ -1,0 +1,150 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Contract</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+<div class="center">
+    <img class="center" src="{% static 'pages/media/main_logo.png' %}" alt="" width="300" height="300">
+</div>
+<div class="center" style="margin-top: 30px">
+    <div class="title-container">
+        <hr class="line"/>
+        <div class="text">Оберіть дільницю</div>
+        <hr class="line"/>
+    </div>
+
+
+    <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}">
+        {% csrf_token %}
+        <div class="base-blue-frame" style="padding-right: 20px">
+            {% for field in form %}
+            <div style="float:left; margin-right: 20px">
+                <label class="label-1">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="foot">
+            <button class="button-next-back" type="submit">Далі</button>
+        </div>
+    </form>
+
+</div>
+{#<div class="center" style="width: 664px; margin-top: 15px">#}
+{#    <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}">#}
+{#        {% csrf_token %}#}
+{#        <div style="display: flex">#}
+{#            <div class="existing-left radio-input" id="existing-left">#}
+{#                <div style="margin-top: 25px;">#}
+{#                    <input class="create-radio" type="radio" id="existing" name="drone" value="existing"/>#}
+{#                    <label class="text" for="existing">Обрати існуючий договір</label>#}
+{#                </div>#}
+{#                <div class="center" style="width: 220px; text-align: left; margin-bottom: 25px;" id="ex-left">#}
+{#                    <label class="label-1">ЕІС код</label>#}
+{#                    <input class="input-tech-left" style="width: 215px" type="text" id="eisCodeInput"/>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="existing-right radio-input">#}
+{#                <div style="margin-top: 25px;">#}
+{#                    <input class="create-radio" type="radio" id="new" name="drone" value="new" checked/>#}
+{#                    <label class="text" for="new">Створити новий договір</label>#}
+{#                </div>#}
+{#                <div class="center" style="width: 220px; text-align: left; margin-bottom: 25px;" id="ex-right">#}
+{#                    {% for field in form %}#}
+{#                        <label class="label-1">{{ field.label }}</label>#}
+{#                        {{ field }}#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="foot">#}
+{#                <button type="submit">Далі</button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
+{##}
+{#</div>#}
+</body>
+<script src="{% static 'js/jquery3.3.1.min.js' %}" type="text/javascript"></script>
+<script>
+    // Код для AJAX-запиту
+    $(document).ready(function () {
+        var so = $("#id_so");
+
+
+        if (so.val() === '') {
+            $("#id_department").prop("disabled", true);
+        }
+        so.change(function () {
+            var url = $("#personForm").attr("data-cities-url");
+            var soId = $(this).val();
+
+            if (soId === '') {
+                $("#id_department").prop("disabled", true);
+            } else {
+                $("#id_department").prop("disabled", false);
+            }
+
+            $.ajax({
+                url: url,
+                data: {
+                    'so': soId
+                },
+                success: function (data) {
+                    $("#id_department").html(data);
+                }
+            });
+        });
+    });
+
+    const existingRadio = document.getElementById('existing');
+    const newRadio = document.getElementById('new');
+    const exLeftFields = document.querySelectorAll('.existing-left .center *');
+    const exRightFields = document.querySelectorAll('.existing-right .center *');
+
+    exLeftFields.forEach(field => {
+        field.disabled = true;
+        console.log(field)
+
+    });
+    // Add event listeners to the radio buttons
+    existingRadio.addEventListener('change', () => {
+        if (existingRadio.checked) {
+            // Enable fields in "existing-left" and disable fields in "existing-right"
+            exLeftFields.forEach(field => {
+                field.disabled = false;
+            });
+            exRightFields.forEach(field => {
+                field.disabled = true;
+            });
+        }
+    });
+
+    newRadio.addEventListener('change', () => {
+        $(document).ready(function () {
+            const so = $("#id_so");
+            if (newRadio.checked) {
+                // Enable fields in "existing-right" and disable fields in "existing-left"
+                exRightFields.forEach(field => {
+                    if (so.val() === '') {
+                        $("#id_department").prop("disabled", true);
+                    }
+                    field.disabled = false;
+                });
+                exLeftFields.forEach(field => {
+                    field.disabled = true;
+                });
+            }
+        })
+    });
+
+</script>
+
+</html>
+
+
+

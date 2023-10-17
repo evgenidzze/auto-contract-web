@@ -1,0 +1,91 @@
+{% load static %}
+{% load utils %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Auto Contract</title>
+</head>
+<body>
+<a href="{% url 'page_1_update' object.pk %}" ><button class="general-a">На головну</button></a>
+
+<div class="center">
+    <div class="title-container" style="margin-top: 50px">
+        <hr class="line" style="width: 140px"/>
+        <div class="text">Технічна інформація об'єкта</div>
+        <hr class="line" style="width: 140px"/>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="base-blue-frame" style="width: 1000px;max-width: 650px">
+            <div class="text" style="justify-content: center">
+                <span>Оператор системи</span>
+                <hr class="line" style="margin: 3px auto; width: 300px">
+            </div>
+
+            <div style="display: flex">
+                <div style="text-align: right; margin-top: 15px; width: 220px">
+                    {% for f in form %}
+                        {% if forloop.counter <= 3 %}
+                            <label class="label-to-left">{{ f.label }}</label>
+                            {{ f }}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div style="text-align: right; margin-top: 15px; margin-left: auto">
+
+                    <label class="label-to-left">{{ form.resistance_num.label }}</label>
+                    {{ form.resistance_num }}
+                    <br>
+                    <label class="label-to-left">{{ form.full_trans_power.label }}</label>
+                    {{ form.full_trans_power }}
+                    <br>
+                    <label class="label-to-left">{{ form.substation_name.label }}</label>
+                    {{ form.substation_name }}
+                    <br>
+
+                </div>
+            </div>
+
+            <div class="text" style="justify-content: center; margin-top: 10px">
+                <span>Споживач</span>
+                <hr class="line" style="margin: 3px auto; width: 300px">
+            </div>
+            <div style="display: flex">
+
+                <div style="text-align: right; margin-top: 15px; width: 220px">
+                    <label class="label-to-left">{{ form.line_type.label }}</label>
+                    {{ form.line_type }}
+                    <br>
+                    {% for f in form %}
+                        {% if forloop.counter > 7 and forloop.counter <= 15 %}
+                            <label class="label-to-left">{{ f.label }}</label>
+                            {{ f }}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div style="text-align: right; margin-top: 15px; width: 370px; margin-left: 70px">
+                    {% for f in form %}
+                        {% if forloop.counter > 15 and forloop.counter <= 24 %}
+                            <label class="label-to-left">{{ f.label }}</label>
+                            {{ f }}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="foot">
+            <button class="button-next-back" type="submit" name="save">Далі</button>
+            <button class="button-next-back" style="right: 0;left: 130px" type="submit">Назад</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
