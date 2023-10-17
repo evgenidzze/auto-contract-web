@@ -107,7 +107,7 @@ class Object(models.Model):
                                          verbose_name="Повна юр. назва основного споживача")
     consumer_category = models.ForeignKey('ConsumerCategory', on_delete=models.CASCADE, default=1)
 
-    dgef __str__(self):
+    def __str__(self):
         return str(self.department)
 
 
