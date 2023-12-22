@@ -4,9 +4,9 @@ git clone https://github.com/evgenidzze/auto-contract-web
 
 cd .\auto-contract-web\
 
-python -m venv venv
+python3 -m venv venv
 
-.\venv\Scripts\activate
+source venv\bin\activate
 
 pip install -r .\requirements.txt
 
